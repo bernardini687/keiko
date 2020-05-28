@@ -2,13 +2,14 @@ import { log } from './logger.ts'
 import { db } from './provider.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
+import { expand } from './transformers.ts'
 
 // validate args (import validator from validator)
 // validator.entry(): boolean
 
-// regex for /^[glce]|general|leisure|culture|extra$/ case insensitive
+// regex for /^[glce]$/ case insensitive
 
-// if /^[i]|income$/ case insensitive => regulars
+// if /^i$/ case insensitive => regulars
 // regex for intervals
 
 // regex for /^-?\n+[.,](?=\n*)$/
@@ -17,16 +18,12 @@ import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
 const [category, amount, date] = Deno.args
 log(Deno.args)
 
-// transform input
-// category: g => general
-// category: G => general
-
 // amount: 10.12 =>   -1012 =>   10,12
 // amount: -10.3 =>   -1030 =>   10,30
 // amount: -1000 => -100000 => 1000,00
 
 const entry = {
-  category,
+  category: expand(category),
   amount: -Math.abs(Number(amount)),
   date: miniDate(date),
 }

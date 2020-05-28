@@ -1,6 +1,6 @@
 type Category = 'general' | 'leisure' | 'culture' | 'extra' | 'income'
 
-export function expandCategory(x: string): Category {
+export function expand([x]: string): Category {
   const categoryMap: Record<string, Category> = {
     g: 'general',
     l: 'leisure',
@@ -9,7 +9,7 @@ export function expandCategory(x: string): Category {
     i: 'income',
   }
 
-  return categoryMap[x.toLowerCase()]
+  return categoryMap[x?.toLowerCase()]
 }
 
 export function shiftDecimal() {}
