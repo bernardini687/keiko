@@ -1,0 +1,24 @@
+env:
+  DENO_ENV: dev
+
+scripts:
+  prepare:
+    desc: Prepare the database.
+    cmd: prepare.ts
+    allow:
+      - env
+      - read
+      - write
+  review:
+    desc: Review the entries.
+    cmd: review.ts
+    allow:
+      - env
+      - read
+  add:
+    desc: Add an entry `[*CATEGORY] [*AMOUNT] [DATE | TODAY]`.
+    cmd: add.ts
+    allow:
+      - env
+      - read
+      - write
