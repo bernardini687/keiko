@@ -8,7 +8,7 @@ const rows = db.query(
 )
 
 for (const row of rows) {
-  console.log(row)
+  console.log(row) // use minitable
 }
 
 db.close()

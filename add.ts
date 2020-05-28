@@ -1,21 +1,21 @@
 import { db } from './provider.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
+import { log } from './logger.ts'
 
-// validate first (import validator from validator)
+// validate args (import validator from validator)
 // validator.entry(): boolean
 
 const [category, amount, date] = Deno.args
-console.log(Deno.args)
+log(Deno.args)
 
 // transform input
 // category: g => general
 // category: G => general
 
-// amount: 10.12 => -1012
-// amount: -10.3 => -1030
-
-// date:
+// amount: 10.12 =>   -1012 =>   10.12
+// amount: -10.3 =>   -1030 =>   10.30
+// amount: -1000 => -100000 => 1000.00
 
 const entry = {
   category,
@@ -23,6 +23,7 @@ const entry = {
   date: miniDate(date),
 }
 
+// won't be necessary, rather a try / catch
 if (Deno.args.length >= 2) {
   db.query(
     `
@@ -35,7 +36,7 @@ if (Deno.args.length >= 2) {
     entry
   )
 
-  console.log(entry)
+  log(entry)
 
   await save(db)
 }
