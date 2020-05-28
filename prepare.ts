@@ -1,6 +1,8 @@
 import { db } from './provider.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 
+// id may be unnecessary!
+
 db.query(
   `
   CREATE TABLE IF NOT EXISTS entries (
