@@ -1,7 +1,7 @@
 type Category = 'general' | 'leisure' | 'culture' | 'extra' | 'income'
 
 export function expand([x]: string): Category {
-  const categoryMap: Record<string, Category> = {
+  const categoriesMap: Record<string, Category> = {
     g: 'general',
     l: 'leisure',
     c: 'culture',
@@ -9,10 +9,14 @@ export function expand([x]: string): Category {
     i: 'income',
   }
 
-  return categoryMap[x?.toLowerCase()]
+  return categoriesMap[x?.toLowerCase()]
 }
 
 export function toNegativeCents(n: string) {
-  const toAbsFixed = Math.abs(Number(n.replace(',', '.'))).toFixed(2)
-  return -Number(toAbsFixed) * 100
+  let x
+  x = n.replace(',', '.')
+  x = Number(x)
+  x = Math.abs(x).toFixed(2)
+
+  return -Number(x) * 100
 }

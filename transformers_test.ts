@@ -4,7 +4,7 @@ import { expand, toNegativeCents } from './transformers.ts'
 const { test } = Deno
 
 /*
-  EXPAND CATEGORIES
+  expand()
 */
 test('expands the short version of `general`', () => {
   assertEquals('general', expand('g'))
@@ -46,29 +46,25 @@ test('returns `undefined` from empty strings', () => {
 })
 
 /*
-  toCents
+  toNegativeCents()
 */
-test('it bla bla bla', () => {
+test('transforms negative numbers to negative cents', () => {
   assertEquals(-100, toNegativeCents('-1'))
   assertEquals(-120, toNegativeCents('-1.2'))
   assertEquals(-123, toNegativeCents('-1.23'))
   assertEquals(-12300, toNegativeCents('-123'))
 })
 
-test('it bla bla bla', () => {
+test('transforms positive numbers to negative cents', () => {
   assertEquals(-100, toNegativeCents('1'))
   assertEquals(-120, toNegativeCents('1.2'))
   assertEquals(-123, toNegativeCents('1.23'))
   assertEquals(-12300, toNegativeCents('123'))
 })
 
-test('it bla bla bla', () => {
+test('transforms numbers separated by a comma', () => {
   assertEquals(-100, toNegativeCents('1,0'))
   assertEquals(-123, toNegativeCents('1,234'))
   assertEquals(-1234, toNegativeCents('12,34'))
   assertEquals(-12340, toNegativeCents('123,4'))
-})
-
-test('zero', () => {
-  assertEquals(0, toNegativeCents('0'))
 })

@@ -2,7 +2,7 @@ import { log } from './logger.ts'
 import { db } from './provider.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
-import { expand } from './transformers.ts'
+import { expand, toNegativeCents } from './transformers.ts'
 
 // validate args (import validator from validator)
 // validator.entry(): boolean
@@ -24,7 +24,7 @@ log(Deno.args)
 
 const entry = {
   category: expand(category),
-  amount: -Math.abs(Number(amount)),
+  amount: toNegativeCents(amount),
   date: miniDate(date),
 }
 
