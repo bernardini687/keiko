@@ -1,37 +1,37 @@
 import { assertEquals } from 'https://deno.land/std/testing/asserts.ts'
-import { expand, shiftDecimal } from './transformers.ts'
+import { expand, toNegativeCents } from './transformers.ts'
 
 const { test } = Deno
 
 /*
   EXPAND CATEGORIES
 */
-test('it expand the short version of `general`', () => {
+test('expands the short version of `general`', () => {
   assertEquals('general', expand('g'))
   assertEquals('general', expand('G'))
 })
 
-test('it expand the short version of `leisure`', () => {
+test('expands the short version of `leisure`', () => {
   assertEquals('leisure', expand('l'))
   assertEquals('leisure', expand('L'))
 })
 
-test('it expand the short version of `culture`', () => {
+test('expands the short version of `culture`', () => {
   assertEquals('culture', expand('c'))
   assertEquals('culture', expand('C'))
 })
 
-test('it expand the short version of `extra`', () => {
+test('expands the short version of `extra`', () => {
   assertEquals('extra', expand('e'))
   assertEquals('extra', expand('E'))
 })
 
-test('it expand the short version of `income`', () => {
+test('expands the short version of `income`', () => {
   assertEquals('income', expand('i'))
   assertEquals('income', expand('I'))
 })
 
-test('it works with anything that would start with the intended initials', () => {
+test('works with anything that would start with the intended initials', () => {
   assertEquals('general', expand('general'))
   assertEquals('leisure', expand('loop'))
   assertEquals('culture', expand('CDN'))
@@ -39,39 +39,36 @@ test('it works with anything that would start with the intended initials', () =>
   assertEquals('income', expand('island'))
 })
 
-test('it works with anything that starts with the intended initials', () => {
+test('returns `undefined` from empty strings', () => {
   assertEquals(undefined, expand(''))
   assertEquals(undefined, expand(' '))
+  assertEquals(undefined, expand('\t'))
 })
 
 /*
-  shiftDecimal
+  toCents
 */
-// test('it bla bla bla', () => {
-//   assertEquals(-100, shiftDecimal('-1'))
-//   assertEquals(-100, shiftDecimal('-1.0'))
-//   assertEquals(-100, shiftDecimal('-1.00'))
+test('it bla bla bla', () => {
+  assertEquals(-100, toNegativeCents('-1'))
+  assertEquals(-120, toNegativeCents('-1.2'))
+  assertEquals(-123, toNegativeCents('-1.23'))
+  assertEquals(-12300, toNegativeCents('-123'))
+})
 
-//   // ceils
+test('it bla bla bla', () => {
+  assertEquals(-100, toNegativeCents('1'))
+  assertEquals(-120, toNegativeCents('1.2'))
+  assertEquals(-123, toNegativeCents('1.23'))
+  assertEquals(-12300, toNegativeCents('123'))
+})
 
-//   assertEquals(-101, shiftDecimal('-1.001'))
-//   assertEquals(-1024, shiftDecimal('-10.23004'))
-//   assertEquals(-10000, shiftDecimal('-100'))
-// })
+test('it bla bla bla', () => {
+  assertEquals(-100, toNegativeCents('1,0'))
+  assertEquals(-123, toNegativeCents('1,234'))
+  assertEquals(-1234, toNegativeCents('12,34'))
+  assertEquals(-12340, toNegativeCents('123,4'))
+})
 
-// test('it bla bla bla', () => {
-//   assertEquals(-100, shiftDecimal('1'))
-//   assertEquals(-100, shiftDecimal('1.0'))
-//   assertEquals(-100, shiftDecimal('1.00'))
-
-//   // ceils
-
-//   assertEquals(-101, shiftDecimal('1.001'))
-//   assertEquals(-1024, shiftDecimal('10.23004'))
-//   assertEquals(-10000, shiftDecimal('100'))
-// })
-
-// test('it bla bla bla', () => {
-//   assertEquals(-100, shiftDecimal('1,234'))
-//   assertEquals(-100, shiftDecimal('12,34'))
-// })
+test('zero', () => {
+  assertEquals(0, toNegativeCents('0'))
+})

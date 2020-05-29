@@ -12,4 +12,7 @@ export function expand([x]: string): Category {
   return categoryMap[x?.toLowerCase()]
 }
 
-export function shiftDecimal() {}
+export function toNegativeCents(n: string) {
+  const toAbsFixed = Math.abs(Number(n.replace(',', '.'))).toFixed(2)
+  return -Number(toAbsFixed) * 100
+}
