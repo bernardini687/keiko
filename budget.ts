@@ -3,13 +3,13 @@ import { table } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
 const rows = db.query(
   `
-  SELECT date, amount, category FROM entries
+  SELECT interval, amount, category FROM regulars
   `,
   []
 )
 
-interface Entry {
-  date: string
+interface Regular {
+  interval: string
   amount: string
   category: string
 }
@@ -17,14 +17,14 @@ interface Entry {
 const rawEntries: any[] = []
 
 // @ts-ignore
-for (const [date, amount, category] of rows) {
-  rawEntries.push({ date, amount, category })
+for (const [interval, amount, category] of rows) {
+  rawEntries.push({ interval, amount, category })
 }
 
 // format date and amount for display
 
 console.log(
-  table(rawEntries, ['date', 'amount', 'category'], { upcaseHeader: true })
+  table(rawEntries, ['interval', 'amount', 'category'], { upcaseHeader: true })
 )
 
 db.close()

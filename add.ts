@@ -38,7 +38,7 @@ db.query(
     category, amount, date
   ) VALUES (
     :category, :amount, :date
-  );
+  )
   `,
   entry
 )

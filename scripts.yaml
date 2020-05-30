@@ -15,6 +15,12 @@ scripts:
     allow:
       - env
       - read
+  budget:
+    desc: Show a budget report.
+    cmd: budget.ts
+    allow:
+      - env
+      - read
   add:
     desc: Add an entry `[*CATEGORY] [*AMOUNT] [DATE | TODAY]`.
     cmd: add.ts
