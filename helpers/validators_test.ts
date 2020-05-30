@@ -14,6 +14,8 @@ test('date is optional', () => {
   assert(isEntry(args))
 })
 
+// test('regular is not an entry', () => {})
+
 test('valid entry', () => {
   const args = ['general', '1', '1']
   assert(isEntry(args))
@@ -74,3 +76,12 @@ test('invalid dates', () => {
   args = ['general', '1', '1-1-']
   assert(!isEntry(args))
 })
+
+/*
+  isRegular()
+*/
+// test('valid regular', () => {})
+// test('invalid regular', () => {})
+// test('entry is not a regular', () => {})
+// test('valid intervals', () => {})
+// test('invalid intervals', () => {})
