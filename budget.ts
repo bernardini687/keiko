@@ -1,4 +1,4 @@
-import { db } from './provider.ts'
+import { db } from './helpers/provider.ts'
 import { table } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
 const rows = db.query(
@@ -8,23 +8,23 @@ const rows = db.query(
   []
 )
 
-interface Regular {
+interface DisplayRegular {
   interval: string
   amount: string
   category: string
 }
 
-const rawEntries: any[] = []
+const rawRegulars: any[] = []
 
 // @ts-ignore
 for (const [interval, amount, category] of rows) {
-  rawEntries.push({ interval, amount, category })
+  rawRegulars.push({ interval, amount, category })
 }
 
-// format date and amount for display
+// NOTE: helpers/formatters.ts -> amount for display
 
 console.log(
-  table(rawEntries, ['interval', 'amount', 'category'], { upcaseHeader: true })
+  table(rawRegulars, ['interval', 'amount', 'category'], { upcaseHeader: true })
 )
 
 db.close()

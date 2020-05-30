@@ -1,7 +1,7 @@
-import { log } from './logger.ts'
-import { isEntry } from './validators.ts'
-import { buildEntry } from './builders.ts'
-import { insert } from './inserter.ts'
+import { log } from './helpers/logger.ts'
+import { isEntry } from './helpers/validators.ts'
+import { buildEntry } from './helpers/builders.ts'
+import { insert } from './helpers/inserter.ts'
 
 const { args } = Deno
 
@@ -10,7 +10,5 @@ log(args)
 if (isEntry(args)) {
   await insert(...buildEntry(args))
 } else {
-  console.log('add [CATEGORY] [AMOUNT] [DATE]')
+  console.log('add [CATEGORY!] [AMOUNT!] [DATE]')
 }
-
-Deno.exit()

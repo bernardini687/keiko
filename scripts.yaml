@@ -2,6 +2,19 @@ env:
   DENO_ENV: dev
 
 scripts:
+  add:
+    desc: Add an entry `[CATEGORY!] [AMOUNT!] [DATE]`.
+    cmd: add.ts
+    allow:
+      - env
+      - read
+      - write
+  budget:
+    desc: Show a budget report.
+    cmd: budget.ts
+    allow:
+      - env
+      - read
   prepare:
     desc: Prepare the database.
     cmd: prepare.ts
@@ -15,16 +28,3 @@ scripts:
     allow:
       - env
       - read
-  budget:
-    desc: Show a budget report.
-    cmd: budget.ts
-    allow:
-      - env
-      - read
-  add:
-    desc: Add an entry `[*CATEGORY] [*AMOUNT] [DATE | TODAY]`.
-    cmd: add.ts
-    allow:
-      - env
-      - read
-      - write
