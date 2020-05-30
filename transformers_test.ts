@@ -62,7 +62,7 @@ test('transforms positive numbers to negative cents', () => {
   assertEquals(-12300, toNegativeCents('123'))
 })
 
-test('transforms numbers separated by a comma', () => {
+test('transforms numbers separated by comma', () => {
   assertEquals(-100, toNegativeCents('1,0'))
   assertEquals(-123, toNegativeCents('1,234'))
   assertEquals(-1234, toNegativeCents('12,34'))

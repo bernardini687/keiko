@@ -3,47 +3,47 @@ import { db } from './provider.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
 import { expand, toNegativeCents } from './transformers.ts'
+import { isEntry } from './validators.ts'
 
-// validate args (import validator from validator)
-// validator.entry(): boolean
+const { args } = Deno
 
-// regex for /^[glce]$/ case insensitive
+log(args)
 
-// if /^i$/ case insensitive => regulars
-// regex for intervals
+if (!isEntry(args)) {
+  console.log('add [CATEGORY] [AMOUNT] [DATE]')
+  Deno.exit()
+}
 
-// regex for /^-?\n+[.,](?=\n*)$/
-// regex for date format
+const [category, amount, date] = args
 
-const [category, amount, date] = Deno.args
-log(Deno.args)
-
-// amount: 10.12 =>   -1012 =>   10,12
-// amount: -10.3 =>   -1030 =>   10,30
-// amount: -1000 => -100000 => 1000,00
-
+/*
+  {
+    buildEntry(args)
+  }
+  {
+    buildRegular(args)
+  }
+*/
 const entry = {
   category: expand(category),
   amount: toNegativeCents(amount),
   date: miniDate(date),
 }
+const table = 'entries'
 
 // won't be necessary, rather a try / catch
-if (Deno.args.length >= 2) {
-  db.query(
-    `
-    INSERT INTO entries (
-      category, amount, date
-    ) VALUES (
-      :category, :amount, :date
-    );
-    `,
-    entry
-  )
+db.query(
+  `
+  INSERT INTO ${table} (
+    category, amount, date
+  ) VALUES (
+    :category, :amount, :date
+  );
+  `,
+  entry
+)
 
-  log(entry)
+log(entry)
 
-  await save(db)
-}
-
+await save(db)
 db.close()
