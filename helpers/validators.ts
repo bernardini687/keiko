@@ -1,22 +1,29 @@
 export function isEntry(args: string[]): boolean {
   const [x, y, z] = args
-  return category(x) && amount(y) && date(z)
+  return isCategory(x) && isAmount(y) && isDate(z)
 }
 
-export function regular() {}
+export function isRegular(args: string[]): boolean {
+  const [x, y, z] = args
+  return isCategory(x) && isAmount(y) && isInterval(z)
+}
 
-function category(value: string): boolean {
+function isCategory(value: string): boolean {
   return /^[glcei]/i.test(value)
 }
 
-function amount(value: string): boolean {
+function isAmount(value: string): boolean {
   return /^-?\d+(?:[.,]\d\d?)?$/.test(value)
 }
 
-function date(value: string): boolean {
+function isDate(value: string): boolean {
   if (!value) {
     return true
   }
 
   return /^\d\d?(?:-\d\d?(?:-\d{4})?)?$/.test(value)
+}
+
+function isInterval(value: string): boolean {
+  return /^[dwmy]/i.test(value)
 }

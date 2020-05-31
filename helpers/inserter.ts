@@ -14,7 +14,7 @@ interface DataRegular {
   interval: string
 }
 
-export async function insert(table: string, record: DataEntry) {
+export async function insert(table: string, record: DataEntry | DataRegular) {
   // try / catch
   db.query(
     `

@@ -1,5 +1,5 @@
-import { assert } from 'https://deno.land/std/testing/asserts.ts'
-import { isEntry } from './validators.ts'
+import { assert, assertEquals } from 'https://deno.land/std/testing/asserts.ts'
+import { isEntry, isRegular } from './validators.ts'
 
 const { test } = Deno
 
@@ -14,7 +14,10 @@ test('date is optional', () => {
   assert(isEntry(args))
 })
 
-// test('regular is not an entry', () => {})
+test('regular is not an entry', () => {
+  const args = ['extra', '50', 'y']
+  assertEquals(isEntry(args), false)
+})
 
 test('valid entry', () => {
   const args = ['general', '1', '1']
@@ -23,7 +26,7 @@ test('valid entry', () => {
 
 test('invalid entry', () => {
   const args = ['foo', 'bar', 'baz']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 })
 
 test('valid categories', () => {
@@ -36,10 +39,10 @@ test('valid categories', () => {
 
 test('invalid categories', () => {
   let args = ['foo', '1', '1-1']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 
   args = ['100', '1', '1-1-1000']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 })
 
 test('valid amounts', () => {
@@ -52,13 +55,13 @@ test('valid amounts', () => {
 
 test('invalid amounts', () => {
   let args = ['G', 'foo', '1-1']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 
   args = ['income', '32-32', '1-1-1000']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 
   args = ['income', '32.320', '1-1-1000']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 })
 
 test('valid dates', () => {
@@ -71,17 +74,42 @@ test('valid dates', () => {
 
 test('invalid dates', () => {
   let args = ['general', '1', '1-']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 
   args = ['general', '1', '1-1-']
-  assert(!isEntry(args))
+  assertEquals(isEntry(args), false)
 })
 
 /*
   isRegular()
 */
-// test('valid regular', () => {})
-// test('invalid regular', () => {})
-// test('entry is not a regular', () => {})
-// test('valid intervals', () => {})
-// test('invalid intervals', () => {})
+test('valid regular', () => {
+  const args = ['extra', '50', 'y']
+  assert(isRegular(args))
+})
+
+test('invalid regular', () => {
+  const args = ['foo', 'bar', 'baz']
+  assertEquals(isRegular(args), false)
+})
+
+test('entry is not a regular', () => {
+  const args = ['general', '1', '1']
+  assertEquals(isRegular(args), false)
+})
+
+test('valid intervals', () => {
+  let args = ['general', '1', 'month']
+  assert(isRegular(args))
+
+  args = ['general', '1', 'M']
+  assert(isRegular(args))
+})
+
+test('invalid intervals', () => {
+  let args = ['general', '1', 'foo']
+  assertEquals(isRegular(args), false)
+
+  args = ['general', '1', 'baz']
+  assertEquals(isRegular(args), false)
+})

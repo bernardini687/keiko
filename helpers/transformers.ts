@@ -1,12 +1,17 @@
 type Category = 'general' | 'leisure' | 'culture' | 'extra' | 'income'
+type Interval = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
-export function expand([x]: string): Category {
-  const categoriesMap: Record<string, Category> = {
+export function expand([x]: string): Category | Interval {
+  const categoriesMap: Record<string, Category | Interval> = {
     g: 'general',
     l: 'leisure',
     c: 'culture',
     e: 'extra',
     i: 'income',
+    d: 'daily',
+    w: 'weekly',
+    m: 'monthly',
+    y: 'yearly',
   }
 
   return categoriesMap[x?.toLowerCase()]

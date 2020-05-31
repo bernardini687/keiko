@@ -7,6 +7,12 @@ interface DataEntry {
   date: Date
 }
 
+interface DataRegular {
+  category: string
+  amount: number
+  interval: string
+}
+
 export function buildEntry(values: string[]): ['entries', DataEntry] {
   const [category, amount, date] = values
 
@@ -17,4 +23,18 @@ export function buildEntry(values: string[]): ['entries', DataEntry] {
   }
 
   return ['entries', entry]
+}
+
+export function buildRegular(values: string[]): ['regulars', DataRegular] {
+  const category = expand(values[0])
+  const amount =
+    category == 'income' ? -toNegativeCents(values[1]) : toNegativeCents(values[1])
+
+  const regulars: DataRegular = {
+    category,
+    amount,
+    interval: expand(values[2]),
+  }
+
+  return ['regulars', regulars]
 }
