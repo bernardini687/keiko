@@ -1,30 +1,44 @@
 import { db } from './helpers/provider.ts'
-import { table } from 'https://deno.land/x/minitable@v1.0/mod.ts'
+import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
+
+let table: string
+let column: string
+
+if (Deno.args[0]?.[0] === 'r') {
+  table = 'regulars'
+  column = 'interval'
+} else {
+  table = 'entries'
+  column = 'date'
+}
+
+console.log(table, column)
 
 const rows = db.query(
   `
-  SELECT date, amount, category FROM entries
+  SELECT ${column}, amount, category FROM ${table}
   `,
   []
 )
 
-interface DisplayEntry {
-  date: string
-  amount: string
-  category: string
-}
+const rawRecords: any[] = []
 
-const rawEntries: any[] = []
-
-// @ts-ignore
-for (const [date, amount, category] of rows) {
-  rawEntries.push({ date, amount, category })
+if (table === 'regulars') {
+  // @ts-ignore
+  for (const [interval, amount, category] of rows) {
+    rawRecords.push({ interval, amount, category })
+  }
+} else {
+  // @ts-ignore
+  for (const [date, amount, category] of rows) {
+    rawRecords.push({ date, amount, category })
+  }
 }
 
 // NOTE: helpers/formatters.ts -> date and amount for display
 
 console.log(
-  table(rawEntries, ['date', 'amount', 'category'], { upcaseHeader: true })
+  miniTable(rawRecords, Object.keys(rawRecords[0]), { upcaseHeader: true })
 )
 
 db.close()
