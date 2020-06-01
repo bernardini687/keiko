@@ -1,4 +1,6 @@
 import { balance } from './queries/mod.ts'
+import { db } from './helpers/provider.ts'
+import { formatAmt, formatPct } from './helpers/formatters.ts'
 import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
 function percent(tot: number, partial: number) {
@@ -32,11 +34,13 @@ console.log('today', today)
 const endOfMonth = percentage(today, days)
 
 const budget = {
-  'per month': (perMonth / 100).toFixed(2).replace('.', ','),
-  'per day': (perDay / 100).toFixed(2).replace('.', ','),
-  'end of month': endOfMonth.toFixed(0) + '%',
-  spent: spent.toFixed(0) + '%',
-  'save goal': (saveGoal / 100).toFixed(2).replace('.', ','),
+  'per month': formatAmt(perMonth),
+  'per day': formatAmt(perDay),
+  'end of month': formatPct(endOfMonth),
+  spent: formatPct(spent),
+  'save goal': formatAmt(saveGoal),
 }
 
 console.log(miniTable([budget], Object.keys(budget), { upcaseHeader: true }))
+
+db.close()

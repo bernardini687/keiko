@@ -1,10 +1,14 @@
 import { db } from './helpers/provider.ts'
+import { firstArg } from './helpers/first_arg.ts'
+import { formatAmt, formatDate } from './helpers/formatters.ts'
 import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
-let table: string
-let column: string
+const REGULARS = firstArg?.startsWith('r')
 
-if (Deno.args[0]?.[0] === 'r') {
+let table: 'regulars' | 'entries'
+let column: 'interval' | 'date'
+
+if (REGULARS) {
   table = 'regulars'
   column = 'interval'
 } else {
@@ -12,7 +16,7 @@ if (Deno.args[0]?.[0] === 'r') {
   column = 'date'
 }
 
-console.log(table, column)
+console.log(table.toUpperCase())
 
 const rows = db.query(
   `
@@ -21,24 +25,24 @@ const rows = db.query(
   []
 )
 
-const rawRecords: any[] = []
+const records: any[] = []
 
-if (table === 'regulars') {
+if (REGULARS) {
   // @ts-ignore
   for (const [interval, amount, category] of rows) {
-    rawRecords.push({ interval, amount, category })
+    records.push({ interval, amount: formatAmt(amount), category })
   }
 } else {
   // @ts-ignore
   for (const [date, amount, category] of rows) {
-    rawRecords.push({ date, amount, category })
+    records.push({
+      date: formatDate(new Date(date)),
+      amount: formatAmt(amount),
+      category,
+    })
   }
 }
 
-// NOTE: helpers/formatters.ts -> date and amount for display
-
-console.log(
-  miniTable(rawRecords, Object.keys(rawRecords[0]), { upcaseHeader: true })
-)
+console.log(miniTable(records, Object.keys(records[0]), { upcaseHeader: true }))
 
 db.close()
