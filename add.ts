@@ -15,6 +15,6 @@ if (isEntry(args)) {
 if (isRegular(args)) {
   await insert(...buildRegular(args))
 } else {
-  console.log('TODO: show help!')
+  console.log('TODO: help handling')
   exit(1)
 }
