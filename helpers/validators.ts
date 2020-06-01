@@ -1,11 +1,11 @@
-export function isEntry(args: string[]): boolean {
-  const [x, y, z] = args
-  return isCategory(x) && isAmount(y) && isDate(z)
+/** Verify the given arguments are okay for an _Entry_ record. */
+export function isEntry([cat, amt, date]: string[]): boolean {
+  return isCategory(cat) && isAmount(amt) && isDate(date)
 }
 
-export function isRegular(args: string[]): boolean {
-  const [x, y, z] = args
-  return isCategory(x) && isAmount(y) && isInterval(z)
+/** Verify the given arguments are okay for a _Regular_ record. */
+export function isRegular([cat, amt, date]: string[]): boolean {
+  return isCategory(cat) && isAmount(amt) && isInterval(date)
 }
 
 function isCategory(value: string): boolean {
@@ -18,6 +18,7 @@ function isAmount(value: string): boolean {
 
 function isDate(value: string): boolean {
   if (!value) {
+    // a date is optional
     return true
   }
 

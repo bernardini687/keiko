@@ -1,40 +1,31 @@
-import { expand, toNegativeCents } from './transformers.ts'
+import { BaseRow, EntryRow, RegularRow } from '../interfaces/mod.ts'
+import { expand, toNegCents, toPosCents } from './transformers.ts'
 import shape from 'https://deno.land/x/minidate@v1.0/mod.ts'
 
-interface DataEntry {
-  category: string
-  amount: number
-  date: Date
-}
-
-interface DataRegular {
-  category: string
-  amount: number
-  interval: string
-}
-
-export function buildEntry(values: string[]): ['entries', DataEntry] {
-  const [category, amount, date] = values
-
-  const entry: DataEntry = {
-    category: expand(category),
-    amount: toNegativeCents(amount),
+/** Build a one-time entry (or, simply, `entry`). */
+export function buildEntry([cat, amt, date]: string[]): ['entries', EntryRow] {
+  const entry: EntryRow = Object.assign(buildBase(cat, amt), {
     date: shape(date),
-  }
+  })
 
   return ['entries', entry]
 }
 
-export function buildRegular(values: string[]): ['regulars', DataRegular] {
-  const category = expand(values[0])
-  const amount =
-    category == 'income' ? -toNegativeCents(values[1]) : toNegativeCents(values[1])
-
-  const regulars: DataRegular = {
-    category,
-    amount,
-    interval: expand(values[2]),
-  }
+/** Build a recurring entry (or, simply, `regular`). */
+export function buildRegular([cat, amt, int]: string[]): ['regulars', RegularRow] {
+  const regulars: RegularRow = Object.assign(buildBase(cat, amt), {
+    interval: expand(int),
+  })
 
   return ['regulars', regulars]
+}
+
+function buildBase(cat: string, amt: string): BaseRow {
+  const category = expand(cat)
+  const amount = category === 'income' ? toPosCents(amt) : toNegCents(amt)
+
+  return {
+    category,
+    amount,
+  }
 }

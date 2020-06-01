@@ -1,21 +1,15 @@
-import { log } from './logger.ts'
 import { db } from './provider.ts'
+import { EntryRow, RegularRow } from '../interfaces/mod.ts'
+import { log } from './logger.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 
-interface DataEntry {
-  category: string
-  amount: number
-  date: Date
-}
-
-interface DataRegular {
-  category: string
-  amount: number
-  interval: string
-}
-
-export async function insert(table: string, record: DataEntry | DataRegular) {
-  // try / catch
+/**
+ * Persist a new row in the database.
+ * @param table The name of the database table in which to persist the record.
+ * @param record The record to persist (an _EntryRow_ or a _RegularRow_).
+ */
+export async function insert(table: string, record: EntryRow | RegularRow) {
+  // TODO: try / catch
   db.query(
     `
     INSERT INTO ${table} (

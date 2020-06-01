@@ -1,5 +1,5 @@
 import { assertEquals } from 'https://deno.land/std/testing/asserts.ts'
-import { expand, toNegativeCents } from './transformers.ts'
+import { expand, toNegCents, toPosCents } from './transformers.ts'
 
 const { test } = Deno
 
@@ -46,25 +46,49 @@ test('returns `undefined` from empty strings', () => {
 })
 
 /*
-  toNegativeCents()
+  toNegCents()
 */
 test('transforms negative numbers to negative cents', () => {
-  assertEquals(toNegativeCents('-1'), -100)
-  assertEquals(toNegativeCents('-1.2'), -120)
-  assertEquals(toNegativeCents('-1.23'), -123)
-  assertEquals(toNegativeCents('-123'), -12300)
+  assertEquals(toNegCents('-1'), -100)
+  assertEquals(toNegCents('-1.2'), -120)
+  assertEquals(toNegCents('-1.23'), -123)
+  assertEquals(toNegCents('-123'), -12300)
 })
 
 test('transforms positive numbers to negative cents', () => {
-  assertEquals(toNegativeCents('1'), -100)
-  assertEquals(toNegativeCents('1.2'), -120)
-  assertEquals(toNegativeCents('1.23'), -123)
-  assertEquals(toNegativeCents('123'), -12300)
+  assertEquals(toNegCents('1'), -100)
+  assertEquals(toNegCents('1.2'), -120)
+  assertEquals(toNegCents('1.23'), -123)
+  assertEquals(toNegCents('123'), -12300)
 })
 
 test('transforms numbers separated by comma', () => {
-  assertEquals(toNegativeCents('1,0'), -100)
-  assertEquals(toNegativeCents('1,234'), -123)
-  assertEquals(toNegativeCents('12,34'), -1234)
-  assertEquals(toNegativeCents('123,4'), -12340)
+  assertEquals(toNegCents('1,0'), -100)
+  assertEquals(toNegCents('1,234'), -123)
+  assertEquals(toNegCents('12,34'), -1234)
+  assertEquals(toNegCents('123,4'), -12340)
+})
+
+/*
+  toPosCents()
+*/
+test('transforms negative numbers to positive cents', () => {
+  assertEquals(toPosCents('-1'), 100)
+  assertEquals(toPosCents('-1.2'), 120)
+  assertEquals(toPosCents('-1.23'), 123)
+  assertEquals(toPosCents('-123'), 12300)
+})
+
+test('transforms positive numbers to positive cents', () => {
+  assertEquals(toPosCents('1'), 100)
+  assertEquals(toPosCents('1.2'), 120)
+  assertEquals(toPosCents('1.23'), 123)
+  assertEquals(toPosCents('123'), 12300)
+})
+
+test('transforms numbers separated by comma', () => {
+  assertEquals(toPosCents('1,0'), 100)
+  assertEquals(toPosCents('1,234'), 123)
+  assertEquals(toPosCents('12,34'), 1234)
+  assertEquals(toPosCents('123,4'), 12340)
 })

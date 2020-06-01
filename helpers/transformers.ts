@@ -1,6 +1,7 @@
 type Category = 'general' | 'leisure' | 'culture' | 'extra' | 'income'
 type Interval = 'daily' | 'weekly' | 'monthly' | 'yearly'
 
+/** Extend the short versions of Keiko's specific terms. */
 export function expand([x]: string): Category | Interval {
   const categoriesMap: Record<string, Category | Interval> = {
     g: 'general',
@@ -17,11 +18,20 @@ export function expand([x]: string): Category | Interval {
   return categoriesMap[x?.toLowerCase()]
 }
 
-export function toNegativeCents(n: string) {
+/** Convert a string representing a price to negative cents, representing an expense. */
+export function toNegCents(n: string) {
+  return -Number(toCents(n)) * 100
+}
+
+/** Convert a string representing a price to positive cents, representing an income. */
+export function toPosCents(n: string) {
+  return Number(toCents(n)) * 100
+}
+
+function toCents(n: string) {
   let x
   x = n.replace(',', '.')
   x = Number(x)
-  x = Math.abs(x).toFixed(2)
 
-  return -Number(x) * 100
+  return Math.abs(x).toFixed(2)
 }

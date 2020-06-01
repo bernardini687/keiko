@@ -1,3 +1,4 @@
-export function log(thing: any) {
-  Deno.env.get('DENO_ENV') === 'dev' && console.log(thing)
+/** Development-only console logger. */
+export function log(x: any) {
+  Deno.env.get('DENO_ENV') === 'dev' && console.log(x)
 }
