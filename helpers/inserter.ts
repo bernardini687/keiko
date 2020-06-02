@@ -20,7 +20,7 @@ export async function insert(table: string, record: EntryRow | RegularRow) {
     Object.values(record)
   )
 
-  console.log(record)
+  console.log('RECORD:', record)
 
   await save(db)
   db.close()

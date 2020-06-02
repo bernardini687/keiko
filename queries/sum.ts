@@ -3,7 +3,7 @@ import { db } from '../helpers/provider.ts'
 function startOfMonth(): Date {
   const now = new Date()
   const SOM = new Date(now.getFullYear(), now.getMonth(), 1, 2)
-  console.log('SOM', SOM)
+  console.log('SOM:', SOM)
   return SOM
 }
 

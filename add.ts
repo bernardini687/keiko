@@ -11,12 +11,12 @@ export async function add(args: string[]) {
   if (isRegular(args)) {
     await insert(...buildRegular(args))
   } else {
-    console.log('TODO: help handling')
+    console.log('TODO:', 'help handling')
     exit(1)
   }
 }
 
 const { args, exit } = Deno
-console.log(args)
+console.log('ARGS:', args)
 
 await add(args)

@@ -3,12 +3,12 @@ import { formatAmt, formatDate } from './helpers/formatters.ts'
 import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
 const { args } = Deno
-const REGULARS = args[0]?.startsWith('r')
+const regularsFlagOn = args[0]?.startsWith('r')
 
 let table: 'regulars' | 'entries'
 let column: 'interval' | 'date'
 
-if (REGULARS) {
+if (regularsFlagOn) {
   table = 'regulars'
   column = 'interval'
 } else {
@@ -22,7 +22,7 @@ const rows = db.query(`SELECT ${column}, amount, category FROM ${table}`, [])
 
 const records: any[] = []
 
-if (REGULARS) {
+if (regularsFlagOn) {
   // @ts-ignore
   for (const [interval, amount, category] of rows) {
     records.push({ interval, amount: formatAmt(amount), category })

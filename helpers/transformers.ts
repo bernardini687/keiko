@@ -1,5 +1,5 @@
 type Category = 'general' | 'leisure' | 'culture' | 'extra' | 'income'
-type Interval = 'daily' | 'weekly' | 'monthly' | 'yearly'
+type Interval = 'monthly' | 'yearly'
 
 /** Extend the short versions of Keiko's specific terms. */
 export function expand([x]: string): Category | Interval {
@@ -9,8 +9,6 @@ export function expand([x]: string): Category | Interval {
     c: 'culture',
     e: 'extra',
     i: 'income',
-    d: 'daily',
-    w: 'weekly',
     m: 'monthly',
     y: 'yearly',
   }
