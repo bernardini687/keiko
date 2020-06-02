@@ -3,7 +3,7 @@ env:
 
 scripts:
   add:
-    desc: Add an entry `[CATEGORY!] [AMOUNT!] [DATE]`.
+    desc: Add a record `[CATEGORY!] [AMOUNT!] [DATE | INTERVAL!]`.
     cmd: add.ts
     allow:
       - env
