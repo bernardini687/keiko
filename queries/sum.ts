@@ -4,26 +4,25 @@ import { db } from '../helpers/provider.ts'
  * Compute the balance of the provided database table.
  * @param table The name of the database table to query.
  */
-//@ts-ignore
 export function balance(table: 'entries' | 'regulars'): number {
-  const rows = db.query(
-    `
-    SELECT SUM(amount) FROM ${table}
-    `,
-    []
-  )
+  if (table === 'regulars') {
+    return sumRegulars()
+  }
 
-  let bal: number
+  const [row] = db.query('SELECT SUM(amount) FROM entries', [])
 
-  // TODO: support `interval`
+  return row?.[0] || 0
+}
+
+function sumRegulars(): number {
+  const rows = db.query('SELECT amount, interval FROM regulars', [])
+
+  let bal = 0
 
   //@ts-ignore
-  for (const [sum] of rows) {
-    if (typeof sum === 'number') {
-      bal = sum
-      return bal
-    } else {
-      throw 'TODO: error handling'
-    }
+  for (const [amt, int] of rows) {
+    int === 'yearly' ? (bal += Math.floor(amt / 12)) : (bal += amt)
   }
+
+  return bal
 }

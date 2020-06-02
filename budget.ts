@@ -8,6 +8,9 @@ function percent(tot: number, partial: number) {
 }
 
 function percentage(partial: number, tot: number) {
+  if (tot === 0) {
+    return tot
+  }
   return (100 * partial) / tot
 }
 
@@ -25,6 +28,7 @@ console.log('days', days)
 const regularsBal = balance('regulars')
 const saveGoal = percent(regularsBal, saveFract)
 const perMonth = regularsBal - saveGoal
+
 const spent = percentage(Math.abs(balance('entries')), perMonth)
 
 const perDay = perMonth / days

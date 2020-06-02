@@ -1,6 +1,5 @@
 import { db } from './provider.ts'
 import { EntryRow, RegularRow } from '../interfaces/mod.ts'
-import { log } from './logger.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 
 /**
@@ -21,7 +20,7 @@ export async function insert(table: string, record: EntryRow | RegularRow) {
     Object.values(record)
   )
 
-  log(record)
+  console.log(record)
 
   await save(db)
   db.close()

@@ -26,5 +26,5 @@ function isDate(value: string): boolean {
 }
 
 function isInterval(value: string): boolean {
-  return /^[dwmy]/i.test(value)
+  return /^[my]/i.test(value)
 }

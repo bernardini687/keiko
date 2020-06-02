@@ -107,9 +107,9 @@ test('valid intervals', () => {
 })
 
 test('invalid intervals', () => {
-  let args = ['general', '1', 'foo']
+  let args = ['general', '1', 'daily']
   assertEquals(isRegular(args), false)
 
-  args = ['general', '1', 'baz']
+  args = ['general', '1', 'D']
   assertEquals(isRegular(args), false)
 })
