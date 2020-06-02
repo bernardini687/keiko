@@ -7,15 +7,15 @@ const { test } = Deno
 formatAmt()
 */
 test('formats the amount from cents', () => {
-  assertEquals(formatAmt(2000), '20,00')
-  assertEquals(formatAmt(-300), '-3,00')
+  assertEquals(formatAmt(1989.9999999999998), '19,90')
+  assertEquals(formatAmt(-1999.8999999999999), '-20,00')
 })
 
 /*
   formatDate()
 */
-test('formats the date into `MMM DD`, space-padded', () => {
-  assertEquals(formatDate(new Date(2020, 5, 1)), 'Mon  1')
+test('formats the date into `ddd d`', () => {
+  assertEquals(formatDate(new Date(2020, 5, 1)), 'Mon 1')
   assertEquals(formatDate(new Date(2020, 4, 31)), 'Sun 31')
 })
 
@@ -24,6 +24,6 @@ test('formats the date into `MMM DD`, space-padded', () => {
 */
 test('formats the given number into a percentage, rounding it', () => {
   assertEquals(formatPct(3), '3%')
-  assertEquals(formatPct(3.333), '3%')
-  assertEquals(formatPct(3.6), '4%')
+  assertEquals(formatPct(3.3333333333333335), '3%')
+  assertEquals(formatPct(3.6666666666666665), '4%')
 })

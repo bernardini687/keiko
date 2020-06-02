@@ -19,19 +19,19 @@ export function expand([x]: string): Category | Interval {
 }
 
 /** Convert a string representing a price to negative cents, representing an expense. */
-export function toNegCents(n: string) {
-  return -Number(toCents(n)) * 100
+export function toNegCents(n: string): number {
+  return -toCents(n)
 }
 
 /** Convert a string representing a price to positive cents, representing an income. */
-export function toPosCents(n: string) {
-  return Number(toCents(n)) * 100
+export function toPosCents(n: string): number {
+  return toCents(n)
 }
 
-function toCents(n: string) {
+function toCents(n: string): number {
   let x
   x = n.replace(',', '.')
   x = Number(x)
 
-  return Math.abs(x).toFixed(2)
+  return Math.abs(x) * 100
 }

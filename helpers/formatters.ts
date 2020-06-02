@@ -2,7 +2,7 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 /** TODO */
 export function formatDate(d: Date): string {
-  return DAYS[d.getDay()] + ' ' + d.getDate().toString().padStart(2, ' ')
+  return DAYS[d.getDay()] + ' ' + d.getDate()
 }
 
 /** TODO */

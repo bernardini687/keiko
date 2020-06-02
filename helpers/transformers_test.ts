@@ -50,23 +50,21 @@ test('returns `undefined` from empty strings', () => {
 */
 test('transforms negative numbers to negative cents', () => {
   assertEquals(toNegCents('-1'), -100)
-  assertEquals(toNegCents('-1.2'), -120)
-  assertEquals(toNegCents('-1.23'), -123)
-  assertEquals(toNegCents('-123'), -12300)
+  assertEquals(toNegCents('-19'), -1900)
+  assertEquals(toNegCents('-19.9'), -1989.9999999999998)
+  assertEquals(toNegCents('-19.999'), -1999.8999999999999)
 })
 
 test('transforms positive numbers to negative cents', () => {
   assertEquals(toNegCents('1'), -100)
-  assertEquals(toNegCents('1.2'), -120)
-  assertEquals(toNegCents('1.23'), -123)
-  assertEquals(toNegCents('123'), -12300)
+  assertEquals(toNegCents('19'), -1900)
+  assertEquals(toNegCents('19.9'), -1989.9999999999998)
+  assertEquals(toNegCents('19.999'), -1999.8999999999999)
 })
 
 test('transforms numbers separated by comma', () => {
-  assertEquals(toNegCents('1,0'), -100)
-  assertEquals(toNegCents('1,234'), -123)
-  assertEquals(toNegCents('12,34'), -1234)
-  assertEquals(toNegCents('123,4'), -12340)
+  assertEquals(toNegCents('19,9'), -1989.9999999999998)
+  assertEquals(toNegCents('19,999'), -1999.8999999999999)
 })
 
 /*
@@ -74,21 +72,19 @@ test('transforms numbers separated by comma', () => {
 */
 test('transforms negative numbers to positive cents', () => {
   assertEquals(toPosCents('-1'), 100)
-  assertEquals(toPosCents('-1.2'), 120)
-  assertEquals(toPosCents('-1.23'), 123)
-  assertEquals(toPosCents('-123'), 12300)
+  assertEquals(toPosCents('-19'), 1900)
+  assertEquals(toPosCents('-19.9'), 1989.9999999999998)
+  assertEquals(toPosCents('-19.999'), 1999.8999999999999)
 })
 
 test('transforms positive numbers to positive cents', () => {
   assertEquals(toPosCents('1'), 100)
-  assertEquals(toPosCents('1.2'), 120)
-  assertEquals(toPosCents('1.23'), 123)
-  assertEquals(toPosCents('123'), 12300)
+  assertEquals(toPosCents('19'), 1900)
+  assertEquals(toPosCents('19.9'), 1989.9999999999998)
+  assertEquals(toPosCents('19.999'), 1999.8999999999999)
 })
 
 test('transforms numbers separated by comma', () => {
-  assertEquals(toPosCents('1,0'), 100)
-  assertEquals(toPosCents('1,234'), 123)
-  assertEquals(toPosCents('12,34'), 1234)
-  assertEquals(toPosCents('123,4'), 12340)
+  assertEquals(toPosCents('-19,9'), 1989.9999999999998)
+  assertEquals(toPosCents('-19,999'), 1999.8999999999999)
 })

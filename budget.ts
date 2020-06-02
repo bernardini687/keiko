@@ -14,15 +14,19 @@ function percentage(partial: number, tot: number) {
   return (100 * partial) / tot
 }
 
-function daysInMonth(month: number, year: number) {
-  return new Date(year, month, 0).getDate()
+function todayOfDays(): [number, number] {
+  const now = new Date()
+  return [
+    now.getDate(),
+    new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate(),
+  ]
 }
 
-const saveFract = Number(Deno.env.get('KEIKO_SAVE_FRACT')) || 0
+const saveFract = Number(Deno.env.get('KEIKO_SAVE_GOAL')) || 0
 console.log('fract', saveFract)
 
-const now = new Date()
-const days = daysInMonth(now.getMonth() + 1, now.getFullYear())
+const [today, days] = todayOfDays()
+console.log('today', today)
 console.log('days', days)
 
 const regularsBal = balance('regulars')
@@ -32,8 +36,6 @@ const perMonth = regularsBal - saveGoal
 const spent = percentage(Math.abs(balance('entries')), perMonth)
 
 const perDay = perMonth / days
-const today = now.getDate()
-console.log('today', today)
 
 const endOfMonth = percentage(today, days)
 
