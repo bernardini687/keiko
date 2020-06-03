@@ -1,11 +1,5 @@
-import { db } from '../src/shared/provider.ts'
-
-function startOfMonth(): Date {
-  const now = new Date()
-  const SOM = new Date(now.getFullYear(), now.getMonth(), 1, 2)
-  console.log('SOM::', SOM)
-  return SOM
-}
+import { startOfMonth } from './calculators.ts'
+import { db } from '../../shared/provider.ts'
 
 /**
  * Compute the balance of the provided database table.
