@@ -15,8 +15,8 @@ test('formats the amount from cents', () => {
   formatDate()
 */
 test('formats the date into `ddd d`', () => {
-  assertEquals(formatDate(new Date(2020, 5, 1)), 'Mon 1')
   assertEquals(formatDate(new Date(2020, 4, 31)), 'Sun 31')
+  assertEquals(formatDate(new Date(2020, 5, 1)), 'Mon 1')
 })
 
 /*

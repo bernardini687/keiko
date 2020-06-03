@@ -1,6 +1,6 @@
-import { db } from './provider.ts'
-import { EntryRow, RegularRow } from '../interfaces/mod.ts'
 import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
+import { EntryRow, RegularRow } from '../../interfaces/mod.ts'
+import { db } from '../../shared/provider.ts'
 
 /**
  * Persist a new row in the database.
@@ -20,7 +20,7 @@ export async function insert(table: string, record: EntryRow | RegularRow) {
     Object.values(record)
   )
 
-  console.log('RECORD:', record)
+  console.log('RECORD::', record)
 
   await save(db)
   db.close()

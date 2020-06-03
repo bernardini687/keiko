@@ -1,11 +1,11 @@
-import { BaseRow, EntryRow, RegularRow } from '../interfaces/mod.ts'
+import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
 import { expand, toNegCents, toPosCents } from './transformers.ts'
-import shape from 'https://deno.land/x/minidate@v1.0/mod.ts'
+import { BaseRow, EntryRow, RegularRow } from '../../interfaces/mod.ts'
 
 /** Build a one-time entry (or, simply, `entry`). */
 export function buildEntry([cat, amt, date]: string[]): ['entries', EntryRow] {
   const entry: EntryRow = Object.assign(buildBase(cat, amt), {
-    date: shape(date),
+    date: miniDate(date),
   })
 
   return ['entries', entry]

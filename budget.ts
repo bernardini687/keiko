@@ -1,6 +1,6 @@
 import { balance } from './queries/mod.ts'
-import { db } from './helpers/provider.ts'
-import { formatAmt, formatPct } from './helpers/formatters.ts'
+import { db } from './src/shared/provider.ts'
+import { formatAmt, formatPct } from './src/shared/formatters.ts'
 import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 
 function percentage(partial: number, tot: number) {
@@ -40,7 +40,7 @@ function decorateBudget() {
 
 function rawBudget(regularsBal: number) {
   const [today, days] = todayOfDays()
-  console.log('TODAY:', today, 'DAYS:', days)
+  console.log('TODAY::', today, 'DAYS::', days)
 
   const saveGoal = (regularsBal / 100) * saveFraction
   const perMonth = regularsBal - saveGoal
@@ -52,6 +52,6 @@ function rawBudget(regularsBal: number) {
 }
 
 const saveFraction = Number(Deno.env.get('KEIKO_SAVE_GOAL')) || 0
-console.log('SAVE FRACTION:', saveFraction)
+console.log('SAVE FRACTION::', saveFraction)
 
 budget()

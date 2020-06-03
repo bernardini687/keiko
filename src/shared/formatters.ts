@@ -1,8 +1,8 @@
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 /** TODO */
 export function formatDate(d: Date): string {
-  return DAYS[d.getDay()] + ' ' + d.getDate()
+  return days[d.getDay()] + ' ' + d.getDate()
 }
 
 /** TODO */

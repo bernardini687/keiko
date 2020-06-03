@@ -1,5 +1,5 @@
-touch dev.db &&
-rm dev.db &&
+touch db/dev.db &&
+rm db/dev.db &&
 vr prepare &&
 
 vr add i 1350 m &&

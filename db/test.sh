@@ -1,5 +1,5 @@
-touch test.db &&
-rm test.db &&
+touch db/test.db &&
+rm db/test.db &&
 DENO_ENV=test deno run -A prepare.ts &&
 
 DENO_ENV=test deno run -A add.ts g 120 y &&
