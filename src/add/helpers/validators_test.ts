@@ -1,5 +1,5 @@
-import { assert, assertEquals } from 'https://deno.land/std/testing/asserts.ts'
 import { isEntry, isRegular } from './validators.ts'
+import { assert, assertEquals } from '../../deps.ts'
 
 const { test } = Deno
 

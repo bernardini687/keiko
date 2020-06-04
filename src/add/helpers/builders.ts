@@ -1,6 +1,6 @@
-import miniDate from 'https://deno.land/x/minidate@v1.0/mod.ts'
 import { expand, toNegCents, toPosCents } from './transformers.ts'
 import { BaseRow, EntryRow, RegularRow } from '../../interfaces/mod.ts'
+import { miniDate } from '../../deps.ts'
 
 /** Build a one-time entry (or, simply, `entry`). */
 export function buildEntry([cat, amt, date]: string[]): ['entries', EntryRow] {

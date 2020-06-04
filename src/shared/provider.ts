@@ -1,4 +1,4 @@
-import { open } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
+import { open } from '../deps.ts'
 
 const mode = Deno.env.get('DENO_ENV') ?? 'keiko'
 

@@ -1,5 +1,5 @@
-import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import { db } from '../shared/provider.ts'
+import { save } from '../deps.ts'
 
 export async function prepare() {
   db.query(

@@ -3,7 +3,7 @@ rm db/dev.db &&
 vr prepare &&
 
 vr add i 1350 m &&
-vr add g 3 m &&
+vr add g 4 m &&
 vr add g 6 m &&
 vr add g 350 m &&
 vr add g 50 m &&

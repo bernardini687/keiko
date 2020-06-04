@@ -1,6 +1,6 @@
-import { save } from 'https://deno.land/x/sqlite@v1.0.0/mod.ts'
 import { EntryRow, RegularRow } from '../../interfaces/mod.ts'
 import { db } from '../../shared/provider.ts'
+import { save } from '../../deps.ts'
 
 /**
  * Persist a new row in the database.

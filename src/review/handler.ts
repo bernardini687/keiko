@@ -1,6 +1,6 @@
-import { table as miniTable } from 'https://deno.land/x/minitable@v1.0/mod.ts'
 import { formatAmt, formatDate } from '../shared/formatters.ts'
 import { db } from '../shared/provider.ts'
+import { miniTable } from '../deps.ts'
 
 export function review(table: 'regulars' | 'entries') {
   if (table === 'regulars') {
