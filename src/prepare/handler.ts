@@ -1,7 +1,6 @@
 import { db } from '../shared/provider.ts'
-import { save } from '../deps.ts'
 
-export async function prepare() {
+export function prepare() {
   db.query(
     `
     CREATE TABLE IF NOT EXISTS entries (
@@ -24,6 +23,5 @@ export async function prepare() {
     []
   )
 
-  await save(db)
   db.close()
 }

@@ -1,13 +1,12 @@
 import { startOfMonth } from './calculators.ts'
-import { db } from '../../shared/provider.ts'
 
 /**
  * Compute the balance of the provided database table.
  * @param table The name of the database table to query.
  */
-export function balance(table: 'entries' | 'regulars'): number {
+export function balance(table: 'entries' | 'regulars', db: any): number {
   if (table === 'regulars') {
-    return sumRegulars()
+    return sumRegulars(db)
   }
 
   const [row] = db.query('SELECT SUM(amount) FROM entries WHERE date > ?', [
@@ -17,7 +16,7 @@ export function balance(table: 'entries' | 'regulars'): number {
   return row?.[0] || 0
 }
 
-function sumRegulars(): number {
+function sumRegulars(db: any): number {
   const rows = db.query('SELECT amount, interval FROM regulars', [])
 
   let bal = 0

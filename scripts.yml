@@ -15,6 +15,7 @@ scripts:
     allow:
       - env
       - read
+      - write
   prepare:
     desc: Prepare the database.
     cmd: prepare.ts
@@ -28,3 +29,4 @@ scripts:
     allow:
       - env
       - read
+      - write
