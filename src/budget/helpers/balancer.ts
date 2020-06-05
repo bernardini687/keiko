@@ -17,7 +17,7 @@ export function balance(table: 'entries' | 'regulars', db: any): number {
 }
 
 function sumRegulars(db: any): number {
-  const rows = db.query('SELECT amount, interval FROM regulars', [])
+  const rows = db.query('SELECT amount, interval FROM regulars')
 
   let bal = 0
 

@@ -14,8 +14,7 @@ export function review(table: 'regulars' | 'entries') {
 
 function showRegulars(records: any[] = []) {
   const rows = db.query(
-    `SELECT interval, amount, category FROM regulars ORDER BY interval DESC, amount ASC`,
-    []
+    'SELECT interval, amount, category FROM regulars ORDER BY interval DESC, amount ASC'
   )
 
   //@ts-ignore
@@ -30,8 +29,7 @@ function showRegulars(records: any[] = []) {
 
 function showEntries(records: any[] = []) {
   const rows = db.query(
-    `SELECT date, amount, category FROM entries ORDER BY date ASC`,
-    []
+    'SELECT date, amount, category FROM entries ORDER BY date ASC'
   )
 
   for (const [date, amount, category] of rows) {
