@@ -30,3 +30,10 @@ scripts:
       - env
       - read
       - write
+  undo:
+    desc: Remove the last inserted row.
+    cmd: undo.ts
+    allow:
+      - env
+      - read
+      - write
