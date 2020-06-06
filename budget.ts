@@ -1,6 +1,4 @@
 import { budget } from './src/budget/handler.ts'
+import { keikoGoal } from './src/budget/helpers/keiko_goal.ts'
 
-const saveFraction = Number(Deno.env.get('KEIKO_SAVE_GOAL')) || 0
-console.log('SAVE FRACTION::', saveFraction)
-
-budget(saveFraction)
+budget(keikoGoal)

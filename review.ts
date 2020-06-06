@@ -1,6 +1,4 @@
 import { review } from './src/review/handler.ts'
-
-const table = Deno.args[0]?.startsWith('r') ? 'regulars' : 'entries'
-console.log('TABLE::', table)
+import { table } from './src/shared/table.ts'
 
 review(table)

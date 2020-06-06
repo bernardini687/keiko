@@ -14,4 +14,4 @@ DENO_ENV=test deno run -A add.ts l 34,99 2-6-2020 &&
 DENO_ENV=test deno run -A review.ts &&
 DENO_ENV=test deno run -A review.ts r &&
 
-DENO_ENV=test KEIKO_SAVE_GOAL=10 deno run -A budget.ts
+DENO_ENV=test KEIKO_GOAL=10 deno run -A budget.ts

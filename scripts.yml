@@ -2,36 +2,41 @@ env:
   DENO_ENV: dev
 
 scripts:
-  add:
-    desc: Add a record `[CATEGORY!] [AMOUNT!] [DATE | INTERVAL!]`.
+  a:
+    desc: Add a record.
     cmd: add.ts
     allow:
       - env
       - read
       - write
-  budget:
+  b:
     desc: Show a budget report.
     cmd: budget.ts
     allow:
       - env
       - read
       - write
-  prepare:
+  h:
+    desc: Show help.
+    cmd: help.ts
+    allow:
+      - env
+  p:
     desc: Prepare the database.
     cmd: prepare.ts
     allow:
       - env
       - read
       - write
-  review:
-    desc: Review the entries.
+  r:
+    desc: Review the records.
     cmd: review.ts
     allow:
       - env
       - read
       - write
-  undo:
-    desc: Remove the last inserted row.
+  u:
+    desc: Remove the last added record.
     cmd: undo.ts
     allow:
       - env
