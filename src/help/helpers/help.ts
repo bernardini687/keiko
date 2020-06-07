@@ -1,8 +1,10 @@
-export const help = `
-  Usage:
-    keiko help [COMMAND] - desc 🚧
+import { bold as b } from '../../deps.ts'
 
-  COMMAND * desc. 🚧
+export const help = `
+  ${b('Usage')}:
+    keiko help [${b('COMMAND')}] - Show help for the available commands
+
+  ${b('COMMAND')}:
     add
     budget
     help
@@ -10,7 +12,7 @@ export const help = `
     review
     undo
 
-  Examples:
+  ${b('Examples')}:
     keiko help
     keiko h
 
