@@ -1,5 +1,5 @@
 env:
-  DENO_ENV: dev
+  DENO_ENV: rent
 
 scripts:
   a:

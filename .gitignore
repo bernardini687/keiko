@@ -1,4 +1,5 @@
 .vscode
 *.db
+!rent.db
 todo.*
 sh
