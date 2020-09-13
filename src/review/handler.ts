@@ -1,6 +1,7 @@
+import { startOfMonth } from '../budget/helpers/calculators.ts'
+import { miniTable } from '../deps.ts'
 import { formatAmt, formatDate } from '../shared/formatters.ts'
 import { db } from '../shared/provider.ts'
-import { miniTable } from '../deps.ts'
 
 export function review(table: 'regulars' | 'entries') {
   if (table === 'regulars') {
@@ -22,14 +23,13 @@ function showRegulars(records: any[] = []) {
     records.push({ interval, amount: formatAmt(amount), category })
   }
 
-  console.log(
-    miniTable(records, ['interval', 'amount', 'category'], { upcaseHeader: true })
-  )
+  console.log(miniTable(records, ['interval', 'amount', 'category'], { upcaseHeader: true }))
 }
 
 function showEntries(records: any[] = []) {
   const rows = db.query(
-    'SELECT date, amount, category FROM entries ORDER BY date ASC'
+    'SELECT date, amount, category FROM entries WHERE date > ? ORDER BY date ASC',
+    [startOfMonth()]
   )
 
   for (const [date, amount, category] of rows) {
@@ -40,7 +40,5 @@ function showEntries(records: any[] = []) {
     })
   }
 
-  console.log(
-    miniTable(records, ['date', 'amount', 'category'], { upcaseHeader: true })
-  )
+  console.log(miniTable(records, ['date', 'amount', 'category'], { upcaseHeader: true }))
 }

@@ -22,7 +22,6 @@ export function decorateBudget(saveFraction: number) {
 
 function rawBudget(regularsBal: number, saveFraction: number) {
   const [today, days] = todayOfDays()
-  console.log('TODAY::', today, 'DAYS::', days)
 
   const saveGoal = (regularsBal / 100) * saveFraction
   const perMonth = regularsBal - saveGoal
