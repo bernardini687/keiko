@@ -1,5 +1,5 @@
 env:
-  DENO_ENV: rent
+  KEIKO_DB: from_june_2021
 
 scripts:
   a:
